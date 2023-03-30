@@ -1,8 +1,11 @@
+import sys
+from pathlib import Path
 from flask import Flask, request, session, render_template, redirect, url_for, g
 from flask_restful import Api, Resource, reqparse
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
+import sql_webshop
 
 app = Flask(__name__)
 api = Api(app)
@@ -31,6 +34,8 @@ class Recom(Resource):
     def get(self, profileid, count):
         """ This function represents the handler for GET requests coming in
         through the API. It currently returns a random sample of products. """
+        print(sql_webshop(profileid))
+
         randcursor = database.products.aggregate([{ '$sample': { 'size': count } }])
         prodids = list(map(lambda x: x['_id'], list(randcursor)))
         return prodids, 200

@@ -1,4 +1,6 @@
 from random import choice
+import re
+
 
 def create_table(cursor, conn, table_name, columns, datatypes):
     """
@@ -29,6 +31,7 @@ def create_table(cursor, conn, table_name, columns, datatypes):
     cursor.execute(query)
     conn.commit()
 
+
 def add_data(cursor, conn, table_name, data):
     """
     Functie voor het toevoegen van data aan de database
@@ -48,6 +51,7 @@ def add_data(cursor, conn, table_name, data):
         print(query)
         cursor.execute(query)
         conn.commit()
+
 
 def get_product_ids(cursor):
     """
@@ -69,6 +73,7 @@ def get_product_ids(cursor):
         ids[ids.index(id)] = id[0]
     return ids
 
+
 def random_product(cursor):
     """
     Functie voor het pakken van een random product id
@@ -88,7 +93,5 @@ def random_product(cursor):
     #kies er 1
     random_id = (choice(ids))
     return random_id[0]
-    
-
 
 

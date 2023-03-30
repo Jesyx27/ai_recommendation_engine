@@ -23,23 +23,25 @@ def brand_recommend(cursor):
 
     #pakt alle producten waarbij producten dezelfde brand hebben
     for item in id_brand:
-        itemquery = f"SELECT _id\nFROM product\nWHERE brand = '{item[1]}'"
+        parsed_item = [i.replace('\'', '\'\'') for i in item]
+        itemquery = f"SELECT _id\nFROM product\nWHERE brand = '{parsed_item[1]}'"
         cursor.execute(itemquery)
         data = cursor.fetchall()
 
-        for item in data:
-            data[data.index(item)] = item[0]
+        for parsed_item in data:
+            data[data.index(parsed_item)] = parsed_item[0]
 
         #slaat alle producten die als enigste die brand hebben over
         if len(data) == 1:
-            print(f'{item[0]}, {data} skipped')
+            print(f'{parsed_item[0]}, {data} skipped')
         else:
-            if item[0] in data:
-                data.remove(item[0])
+            if parsed_item[0] in data:
+                data.remove(parsed_item[0])
             data = str(data)
             data = data.replace("'", "")
-            
-            finaldata.append(f"('{item[0]}', '{data}')")
+
+            zeroth_parsed_item = parsed_item[0].replace('\'', '\'\'')
+            finaldata.append(f"('{zeroth_parsed_item}', '{data}')")
 
     return finaldata
 
@@ -56,9 +58,9 @@ def others_bought(cursor, product_ids):
     """
     preference_query = "SELECT preferences\n FROM session\nWHERE has_sale = true AND preferences IS NOT null"
     finaldata = []
-    print(product_ids)
     for product_id in product_ids:
-        brand_query = f"SELECT brand\nFROM product\nWHERE _id = '{product_id}' AND brand IS NOT null"
+        parsed_product_id = product_id.replace('\'', '\'\'')
+        brand_query = f"SELECT brand\nFROM product\nWHERE _id = '{parsed_product_id}' AND brand IS NOT null"
 
         #pak brand van product
         cursor.execute(brand_query)
@@ -94,5 +96,6 @@ def others_bought(cursor, product_ids):
                 new_rec_brands.remove(rec)
         new_rec_brands = str(new_rec_brands)
         new_rec_brands = new_rec_brands.replace("'", "")
+        brand = brand.replace('\'', '\'\'')
         finaldata.append(f"('{brand}', '{new_rec_brands}')")
     return finaldata

@@ -8,7 +8,8 @@ from random import choice
 
 
 #connectie maken
-PASSWORD = getpass('Geef postgres wachtwoord:')
+# Tijdelijk van getpass naar input veranderd door locale bugs
+PASSWORD = input('Geef postgres wachtwoord:')
 CONN = psycopg2.connect(
 dbname='huwebshop',
 user='postgres',
@@ -71,12 +72,12 @@ def main():
             create_table(CURSOR, CONN, "rec_brand", ["product_id", "recomended_brands"], ["text", "text"])
         
         elif keuze == 2:
-            ids = get_product_ids()
+            ids = get_product_ids(CURSOR)
             data = brand_recommend(CURSOR)
             add_data(CURSOR, CONN, "rec_brand_others", data)
             data = others_bought(CURSOR, ids)
             add_data(CURSOR, CONN, "rec_brand", data)
-        
+
         elif keuze == 3:
             rec_example(CURSOR)
         
