@@ -6,3 +6,6 @@
 .idea/inspectionProfiles/Project_Default.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/ai_recommendation_engine.iml
+/runserver.bat
+/rundb.bat
+/run.bat

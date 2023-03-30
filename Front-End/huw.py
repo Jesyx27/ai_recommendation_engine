@@ -18,12 +18,12 @@ class HUWebshop(object):
     client = None
     database = None
 
-    envvals = ["MONGODBUSER","MONGODBPASSWORD","MONGODBSERVER","RECOMADDRESS"]
+    envvals = ["MONGODBUSER", "MONGODBPASSWORD", "MONGODBSERVER", "RECOMADDRESS"]
     dbstring = 'mongodb+srv://{0}:{1}@{2}/test?retryWrites=true&w=majority'
     recseraddress = "http://127.0.0.1:5001"
 
     categoryindex = None
-    catlevels = ["category","sub_category","sub_sub_category","sub_sub_sub_category"]
+    catlevels = ["category","sub_category", "sub_sub_category", "sub_sub_sub_category"]
     catencode = {}
     catdecode = {}
     mainmenucount = 8
@@ -33,7 +33,7 @@ class HUWebshop(object):
 
     productfields = ["name", "price.selling_price", "properties.discount", "images"]
 
-    recommendationtypes = {'popular':"Anderen kochten ook",'similar':"Soortgelijke producten",'combination':'Combineert goed met','behaviour':'Passend bij uw gedrag','personal':'Persoonlijk aanbevolen'}
+    recommendationtypes = {'popular': "Anderen kochten ook", 'similar': "Soortgelijke producten", 'combination':'Combineert goed met','behaviour':'Passend bij uw gedrag','personal':'Persoonlijk aanbevolen'}
 
     """ ..:: Initialization and Category Index Functions ::.. """
 
