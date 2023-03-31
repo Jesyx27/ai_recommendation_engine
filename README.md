@@ -16,3 +16,7 @@ Om de front-end op te starten moet je de volgende commando's uitvoeren.
     python -m flask --app Front-End/huwrecommend.py run --port 5001
 
     Python -m flask --app Front-End/huw.py run
+
+huwrecommend.py geeft niks terug.  
+huw.py is de webpagina.  
+Voer de commando's uit in die volgorde in verschillende terminals om ze tegelijkertijd te kunnen draaien
