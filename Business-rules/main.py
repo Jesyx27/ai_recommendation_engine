@@ -74,9 +74,9 @@ def main():
         elif keuze == 2:
             ids = get_product_ids(CURSOR)
             data = brand_recommend(CURSOR)
-            add_data(CURSOR, CONN, "rec_brand_others", data)
-            data = others_bought(CURSOR, ids)
             add_data(CURSOR, CONN, "rec_brand", data)
+            data = others_bought(CURSOR, ids)
+            add_data(CURSOR, CONN, "rec_brand_others", data)
 
         elif keuze == 3:
             rec_example(CURSOR)
