@@ -65,3 +65,4 @@ if __name__ == '__main__':
 
     b = get_brands(tuple(collab_brands))
     b = [i[0] for i in b]
+    print(b)
