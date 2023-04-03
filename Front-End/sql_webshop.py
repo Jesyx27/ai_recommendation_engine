@@ -58,11 +58,14 @@ if __name__ == '__main__':
             if i[1] is not None:
                 brands.extend((i[1].keys()))
 
-    collab = get_collaborative_information(brands)
-    collab_brands = set()
-    for i in collab:
-        [collab_brands.add(j.replace('[', '').replace(']', '').strip()) for j in i[0].split(',')]
+    if len(brands) > 0:
+        collab = get_collaborative_information(brands)
+        collab_brands = set()
+        for i in collab:
+            [collab_brands.add(j.replace('[', '').replace(']', '').strip()) for j in i[0].split(',')]
 
-    b = get_brands(tuple(collab_brands))
-    b = [i[0] for i in b]
-    print(b)
+        b = get_brands(tuple(collab_brands))
+        b = [i[0] for i in b]
+        print(b)
+    else:
+        print(':(')
