@@ -1,7 +1,7 @@
 #imports
 from getpass import getpass
 import psycopg2
-from sql_functions import create_table, add_data, get_product_ids, random_product
+from sql_functions import create_table, add_data, get_product_ids, random_product, create_interested_products
 from filters import brand_recommend, others_bought
 from random import choice
 
@@ -63,6 +63,9 @@ def main():
     """
     De main functie
     """
+    # Tijdelijke plaatsing van deze functie
+    create_interested_products(CURSOR, CONN)
+
     while True:
         print("1. Tables maken\n2. Data toevoegen\n3. Voorbeeld geven\n4. Sluiten")
         keuze = int(input("Keuze: "))
@@ -86,6 +89,7 @@ def main():
         
         else:
             print("kies 1, 2, 3 of 4")
+
 
 if __name__ == "__main__":
     main()

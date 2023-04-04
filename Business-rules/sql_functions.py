@@ -95,3 +95,19 @@ def random_product(cursor):
     return random_id[0]
 
 
+def create_interested_products(cursor, conn, table_name="interested_product"):
+    event_table = "event"
+
+    sql = f""" DROP TABLE IF EXISTS {table_name};
+
+                CREATE TABLE {table_name} as SELECT b.v_id, prod.product_array AS product_array
+    FROM (SELECT e1.s_id, array_agg(DISTINCT e2.product) as product_array FROM event AS e1
+    LEFT JOIN {event_table} e2 ON e2.s_id = e1.s_id
+    WHERE (e1.action = 'checkout' OR e1.action = 'add_to_cart')
+    AND e2.product IS NOT NULL
+    GROUP BY e1.s_id) prod
+    INNER JOIN browserid b ON prod.s_id = b.s_id
+    GROUP BY (b.v_id, prod.product_array)"""
+
+    cursor.execute(sql)
+    conn.commit()
