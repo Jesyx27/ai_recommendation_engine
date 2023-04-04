@@ -48,7 +48,20 @@ def get_brands(brands):
     return cur.fetchall()
 
 
-def get
+def get_popular_products(table_name="interested_product"):
+    """ Returns products in a tuple ((product_id, amount purchased), ...)
+    :param table_name string the table where it pulls the
+    :return tuple, i.e.: ((product_id, amount purchased), ...)
+    """
+    sql = f"""SELECT DISTINCT unnest(product_array), count(*) as c FROM {table_name}
+    GROUP BY unnest(product_array)
+    ORDER BY c DESC"""
+    cur.execute(sql)
+    popular_products = cur.fetchall()
+
+    # Copy to avoid mutating the in the for-loop
+    popular_products = [i[0] for i in popular_products.copy()]
+    return popular_products
 
 #recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
@@ -71,3 +84,4 @@ if __name__ == '__main__':
         print(b)
     else:
         print(':(')
+

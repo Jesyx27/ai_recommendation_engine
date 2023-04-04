@@ -34,36 +34,17 @@ class Recom(Resource):
     def get(self, profileid, count):
         """ This function represents the handler for GET requests coming in
         through the API. It currently returns a random sample of products. """
-        print(profileid)
 
-        brands = []
-        recommendation = sql_webshop.recommendation_collaborative(profileid)
-
-        if recommendation is not None:
-            for i in recommendation:
-                if i[1] is not None:
-                    brands.extend((i[1].keys()))
-
-        if len(brands) > 0:
-            # Als er meer dan 0 brands zijn
-            collab = sql_webshop.get_collaborative_information(brands)
-            collab_brands = set()
-            for i in collab:
-                [collab_brands.add(j.replace('[', '').replace(']', '').strip()) for j in i[0].split(',')]
-
-            b = sql_webshop.get_brands(tuple(collab_brands))
-            b = [i[0] for i in b]
-        else:
-            # Voor als de hierboven gegeven query geen resultaten oplevert, geef dan gewoon een product om te
-            # testen dat deze code operationeel is.
-            b = ['8570', '8570', '8570', '8570']
+        #region popular
+        recommended = sql_webshop.get_popular_products()
+        if len(recommended) > count:
+            recommended = recommended[:count]
+        #endregion
 
         randcursor = database.products.aggregate([{'$sample': {'size': count}}])
         prodids = list(map(lambda x: x['_id'], list(randcursor)))
-        print('B', b)
-        print('PROIDS', prodids)
         #return prodids, 200
-        return b, 200
+        return recommended, 200
 
 # This method binds the Recom class to the REST API, to parse specifically
 # requests in the format described below.
