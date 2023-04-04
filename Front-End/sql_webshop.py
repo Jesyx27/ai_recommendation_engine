@@ -48,6 +48,8 @@ def get_brands(brands):
     return cur.fetchall()
 
 
+def get
+
 #recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
     brands = []
