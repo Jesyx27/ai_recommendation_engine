@@ -35,11 +35,10 @@ class Recom(Resource):
         """ This function represents the handler for GET requests coming in
         through the API. It currently returns a random sample of products. """
 
-        print(self)
-
         # choose_recommendation global variables
         choose_recommendation.COUNT = count
-        choose_recommendation.PROFILE_ID = count
+        choose_recommendation.PROFILE_ID = profileid
+        choose_recommendation.SHUFFLE = True
         recommended = choose_recommendation.choose_algorithm(0, True)
 
         randcursor = database.products.aggregate([{'$sample': {'size': count}}])
