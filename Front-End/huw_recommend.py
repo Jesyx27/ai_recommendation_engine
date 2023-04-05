@@ -5,7 +5,7 @@ from flask_restful import Api, Resource, reqparse
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
-import sql_webshop
+import choose_recommendation
 
 app = Flask(__name__)
 api = Api(app)
@@ -35,11 +35,12 @@ class Recom(Resource):
         """ This function represents the handler for GET requests coming in
         through the API. It currently returns a random sample of products. """
 
-        #region popular
-        recommended = sql_webshop.get_popular_products()
-        if len(recommended) > count:
-            recommended = recommended[:count]
-        #endregion
+        print(self)
+
+        # choose_recommendation global variables
+        choose_recommendation.COUNT = count
+        choose_recommendation.PROFILE_ID = count
+        recommended = choose_recommendation.choose_algorithm(0, True)
 
         randcursor = database.products.aggregate([{'$sample': {'size': count}}])
         prodids = list(map(lambda x: x['_id'], list(randcursor)))

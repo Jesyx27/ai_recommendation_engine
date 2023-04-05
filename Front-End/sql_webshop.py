@@ -35,17 +35,24 @@ def recommendation_collaborative(profile_id):
 def get_collaborative_information(recommend_brands):
     query = f"SELECT rec_brand.recomended_brands FROM rec_brand WHERE product_id IN {tuple(recommend_brands)}"
 
-    print(query)
-
     cur.execute(query)
     return cur.fetchall()
 
 
-def get_brands(brands):
-    query = f"SELECT _id FROM product WHERE brand IN {tuple(brands)}"
-    cur.execute(query)
-    print(query)
-    return cur.fetchall()
+def get_brand_products(brands):
+    if len(brands) == 0:
+        return []
+
+    # If it is a singular element (str) turn it into a tuple
+    if type(brands) != tuple and type(brands) != list:
+        brands = (brands, )
+
+    query = f"SELECT _id FROM product WHERE brand = ANY(%s)"
+    cur.execute(query, tuple(brands))
+
+    res = cur.fetchall()
+    # ((0001,), (0002,), ...) => (0001, 0002, ...)
+    return [p_id[0] for p_id in res]
 
 
 def get_popular_products(table_name="interested_product"):
@@ -63,6 +70,29 @@ def get_popular_products(table_name="interested_product"):
     popular_products = [i[0] for i in popular_products.copy()]
     return popular_products
 
+
+def get_brands_of_purchased_products(v_id=""):
+    """
+    Function to get
+
+    :param v_id The profile ID of the current logged in user
+    """
+
+    where_cls = ""
+
+    if v_id != "":
+        where_cls = f"WHERE inter.v_id = '{v_id}'"
+
+    sql = f"""SELECT array_agg(DISTINCT p.brand) FROM (SELECT v_id, unnest(product_array) as prod FROM interested_product) inter
+                        INNER JOIN product p on inter.prod = p._id
+                        {where_cls}
+                        GROUP BY (inter.v_id)
+        """
+
+    cur.execute(sql)
+    return cur.fetchall()
+
+
 #recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
     brands = []
@@ -79,9 +109,8 @@ if __name__ == '__main__':
         for i in collab:
             [collab_brands.add(j.replace('[', '').replace(']', '').strip()) for j in i[0].split(',')]
 
-        b = get_brands(tuple(collab_brands))
+        b = get_brand_products(tuple(collab_brands))
         b = [i[0] for i in b]
-        print(b)
     else:
         print(':(')
 
