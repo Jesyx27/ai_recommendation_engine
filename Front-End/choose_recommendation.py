@@ -9,23 +9,27 @@ global SHUFFLE
 def popular(max_len):
     """
     :param top_len How long th popular list is, this is implemented for the shuffle function
-    :returns Most popular products as taken from `interested_product` table
+    :return Most popular products as taken from `interested_product` table
     """
     print("ALGORITHM || Tried popular()")
     recommended = sql_webshop.get_popular_products()
     if len(recommended) >= max_len:
-        print(recommended[:max_len])
         return recommended[:max_len]
     else:
         return recommended
 
 
-def other_purchase_brand():
-    print("ALGORITHM || Tried other_purchase_brand()")
-    print('BRAND', sql_webshop.get_brands_of_purchased_products(PROFILE_ID))
+def other_purchase(type):
+    """
+    Gets brands of the items the profile with PROFILE_ID has purchased
+    :returns tuple containing brands
+    """
+
+    print("ALGORITHM || Tried other_purchase_category()")
+    print('CATEGORY', sql_webshop.get_similar_of_purchased_products(PROFILE_ID, type))
     print('PROFILE_ID', PROFILE_ID)
 
-    return sql_webshop.get_brand_products(sql_webshop.get_brands_of_purchased_products(PROFILE_ID))
+    return sql_webshop.get_brand_products(sql_webshop.get_similar_of_purchased_products(PROFILE_ID))
 
 
 def choose_algorithm(choice, move_on_if_none=True):
@@ -36,8 +40,13 @@ def choose_algorithm(choice, move_on_if_none=True):
     """
     recommended = []
 
+    # Idea 3; previously purchased categories
+    if choice == 0:
+        recommended = other_purchase('category')
+    # Idea 4; previously purchased brands
     if choice == 1:
-        recommended = other_purchase_brand()
+        recommended = other_purchase('brand')
+    # Idea 1; most popular products
     elif choice == 2:
         recommended = popular(10)
 

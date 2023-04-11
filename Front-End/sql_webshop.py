@@ -71,11 +71,12 @@ def get_popular_products(table_name="interested_product"):
     return popular_products
 
 
-def get_brands_of_purchased_products(v_id=""):
+def get_similar_of_purchased_products(v_id="", type="brand"):
     """
     Function to get
 
-    :param v_id The profile ID of the current logged in user
+    :param v_id: The profile ID of the current logged in user
+    :param type: The column where the data is similar, OPTIONAL. Default = 'brand'
     """
 
     where_cls = ""
@@ -83,7 +84,7 @@ def get_brands_of_purchased_products(v_id=""):
     if v_id != "":
         where_cls = f"WHERE inter.v_id = '{v_id}'"
 
-    sql = f"""SELECT array_agg(DISTINCT p.brand) FROM (SELECT v_id, unnest(product_array) as prod FROM interested_product) inter
+    sql = f"""SELECT array_agg(DISTINCT p.{type}) FROM (SELECT v_id, unnest(product_array) as prod FROM interested_product) inter
                         INNER JOIN product p on inter.prod = p._id
                         {where_cls}
                         GROUP BY (inter.v_id)
