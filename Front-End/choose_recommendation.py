@@ -6,6 +6,7 @@ global COUNT
 global PROFILE_ID
 global SHUFFLE
 
+
 def popular(max_len):
     """
     :param top_len How long th popular list is, this is implemented for the shuffle function
@@ -19,17 +20,18 @@ def popular(max_len):
         return recommended
 
 
-def other_purchase(type):
+def other_purchase(column):
     """
-    Gets brands of the items the profile with PROFILE_ID has purchased
-    :returns tuple containing brands
+    Gets items from column of the items the profile with PROFILE_ID has purchased
+    :returns: tuple containing brands
     """
 
     print("ALGORITHM || Tried other_purchase_category()")
-    print('CATEGORY', sql_webshop.get_similar_of_purchased_products(PROFILE_ID, type))
+    print('CATEGORY', sql_webshop.get_similar_of_purchased_products(PROFILE_ID, column))
     print('PROFILE_ID', PROFILE_ID)
 
     return sql_webshop.get_brand_products(sql_webshop.get_similar_of_purchased_products(PROFILE_ID))
+
 
 
 def choose_algorithm(choice, move_on_if_none=True):

@@ -66,6 +66,7 @@ def main():
     # Tijdelijke plaatsing van deze functie
     create_interested_products(CURSOR, CONN)
 
+
     while True:
         print("1. Tables maken\n2. Data toevoegen\n3. Voorbeeld geven\n4. Sluiten")
         keuze = int(input("Keuze: "))

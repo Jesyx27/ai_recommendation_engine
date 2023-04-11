@@ -19,7 +19,7 @@ def create_table(cursor, conn, table_name, columns, datatypes):
         return
 
     #maak tabel
-    query = f"CREATE TABLE {table_name} (\n"
+    query = f"CREATE TABLE IF NOT EXISTS {table_name} (\n"
 
     #voeg columns toe
     for i in range(len(columns)):
@@ -46,7 +46,7 @@ def add_data(cursor, conn, table_name, data):
 
     #voegt elke item in gegeven data toe aan data
     for item in data:
-        query = f"INSERT INTO {table_name} VALUES {item}"
+        query = f"INSERT INTO {table_name} VALUES ({item})"
         query.replace('"', "'")
         print(query)
         cursor.execute(query)
