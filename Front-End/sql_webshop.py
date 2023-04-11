@@ -94,6 +94,46 @@ def get_similar_of_purchased_products(v_id="", type="brand"):
     return cur.fetchall()
 
 
+def get_collab_query(variables, table, inner_joins='', conditions=''):
+    """
+    Generic SQL functions, especially designed to filter collaboratively
+    :param variables:
+        What variables get returned in the query
+    :param table:
+        Table from which the data is selected
+    :param inner_joins:
+    :param conditions:
+    :return: tuple
+        SQL Result
+    """
+
+    # Complile all list/tuple items
+    if type(conditions) == tuple or type(conditions) == list:
+        conditions = 'WHERE ' + ' AND '.join(conditions)
+    elif len(conditions) > 0:
+        conditions = 'WHERE ' + conditions
+    if type(variables) == tuple or type(variables) == list:
+        variables = ','.join(variables)
+    if type(inner_joins) == tuple or type(inner_joins) == list:
+        inner_joins = 'INNER JOIN ' + inner_joins.join(' INNER JOIN ')
+    elif inner_joins != '':
+        inner_joins = 'INNER JOIN ' + inner_joins
+
+    # SQL standard format
+    sql = f"""SELECT
+                    {variables}
+                FROM
+                    {table}
+                {inner_joins}
+                    {conditions}"""
+
+    # Executing the SQL
+    cur.execute(sql)
+    fetch = cur.fetchall()
+    print('SQL Done')
+    return fetch
+
+
 #recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
     brands = []
