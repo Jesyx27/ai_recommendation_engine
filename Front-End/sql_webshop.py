@@ -105,8 +105,10 @@ def get_collab_query(v_id):
 
 
     # SQL standard format
-    sql = f"""SELECT products FROM {table_name}
-    WHERE v_id = {v_id}"""
+    sql = f"""SELECT {table_name}.products FROM {table_name}
+    WHERE {table_name}.products IS NOT NULL
+    AND {table_name}.v_id = '{v_id}'
+"""
 
     # Executing the SQL
     cur.execute(sql)

@@ -26,16 +26,22 @@ def other_purchase(column):
     :returns: tuple containing brands
     """
 
-    print("ALGORITHM || Tried other_purchase_category()")
-    print('CATEGORY', sql_webshop.get_similar_of_purchased_products(PROFILE_ID, column))
-    print('PROFILE_ID', PROFILE_ID)
+    print(f"ALGORITHM || Tried other_purchase({column})")
 
     return sql_webshop.get_brand_products(sql_webshop.get_similar_of_purchased_products(PROFILE_ID))
 
 
 def collab(v_id):
+    print(f"ALGORITHM || Tried collab({v_id})")
+
     products = sql_webshop.get_collab_query(v_id)
-    return products
+    product_list = ()
+
+    if len(products) > 0:
+        # Unnestling
+        product_list = products[0][0]
+        print(product_list)
+    return product_list
 
 
 def choose_algorithm(choice, v_id="", move_on_if_none=True):
@@ -46,8 +52,6 @@ def choose_algorithm(choice, v_id="", move_on_if_none=True):
     """
     recommended = []
 
-    print(collab(v_id))
-
     # Idea 3; previously purchased categories
     if choice == 0:
         recommended = other_purchase('category')
@@ -55,7 +59,6 @@ def choose_algorithm(choice, v_id="", move_on_if_none=True):
     elif choice == 1:
         recommended = other_purchase('brand')
     elif choice == 2:
-        print(collab)
         recommended = collab(v_id)
     # Idea 1; most popular products
     elif choice == 3:
