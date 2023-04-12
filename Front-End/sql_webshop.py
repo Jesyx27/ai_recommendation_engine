@@ -94,43 +94,23 @@ def get_similar_of_purchased_products(v_id="", type="brand"):
     return cur.fetchall()
 
 
-def get_collab_query(variables, table, inner_joins='', conditions=''):
+def get_collab_query(v_id):
     """
     Generic SQL functions, especially designed to filter collaboratively
-    :param variables:
-        What variables get returned in the query
-    :param table:
-        Table from which the data is selected
-    :param inner_joins:
-    :param conditions:
     :return: tuple
         SQL Result
     """
 
-    # Complile all list/tuple items
-    if type(conditions) == tuple or type(conditions) == list:
-        conditions = 'WHERE ' + ' AND '.join(conditions)
-    elif len(conditions) > 0:
-        conditions = 'WHERE ' + conditions
-    if type(variables) == tuple or type(variables) == list:
-        variables = ','.join(variables)
-    if type(inner_joins) == tuple or type(inner_joins) == list:
-        inner_joins = 'INNER JOIN ' + inner_joins.join(' INNER JOIN ')
-    elif inner_joins != '':
-        inner_joins = 'INNER JOIN ' + inner_joins
+    table_name = "collaborative_a"
+
 
     # SQL standard format
-    sql = f"""SELECT
-                    {variables}
-                FROM
-                    {table}
-                {inner_joins}
-                    {conditions}"""
+    sql = f"""SELECT products FROM {table_name}
+    WHERE v_id = {v_id}"""
 
     # Executing the SQL
     cur.execute(sql)
     fetch = cur.fetchall()
-    print('SQL Done')
     return fetch
 
 

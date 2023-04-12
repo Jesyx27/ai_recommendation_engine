@@ -33,8 +33,12 @@ def other_purchase(column):
     return sql_webshop.get_brand_products(sql_webshop.get_similar_of_purchased_products(PROFILE_ID))
 
 
+def collab(v_id):
+    products = sql_webshop.get_collab_query(v_id)
+    return products
 
-def choose_algorithm(choice, move_on_if_none=True):
+
+def choose_algorithm(choice, v_id="", move_on_if_none=True):
     """
     :param choice Choice of what algorithm to use (temp)
     :param move_on_if_none OPTIONAL, whether to move on to the next algorithm
@@ -42,14 +46,19 @@ def choose_algorithm(choice, move_on_if_none=True):
     """
     recommended = []
 
+    print(collab(v_id))
+
     # Idea 3; previously purchased categories
     if choice == 0:
         recommended = other_purchase('category')
     # Idea 4; previously purchased brands
-    if choice == 1:
+    elif choice == 1:
         recommended = other_purchase('brand')
-    # Idea 1; most popular products
     elif choice == 2:
+        print(collab)
+        recommended = collab(v_id)
+    # Idea 1; most popular products
+    elif choice == 3:
         recommended = popular(10)
 
     if move_on_if_none and len(recommended) == 0:

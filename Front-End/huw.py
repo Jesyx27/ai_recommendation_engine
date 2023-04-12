@@ -228,9 +228,12 @@ class HUWebshop(object):
         service. At the moment, it only transmits the profile ID and the number
         of expected recommendations; to have more user information in the REST
         request, this function would have to change."""
+        print(session.keys())
+        print(self.productdetail)
         resp = requests.get(self.recseraddress+"/"+session['profile_id']+"/"+str(count))
         if resp.status_code == 200:
             recs = eval(resp.content.decode())
+            print(recs)
             queryfilter = {"_id": {"$in": recs}}
             querycursor = self.database.products.find(queryfilter, self.productfields)
             resultlist = list(map(self.prepproduct, list(querycursor)))
@@ -315,6 +318,7 @@ class HUWebshop(object):
     def addtoshoppingcart(self):
         """ This function adds one object to the shopping cart. """
         productid = request.form.get('product_id')
+
         cartids = list(map(lambda x: x[0], session['shopping_cart']))
         if productid in cartids:
             ind = cartids.index(productid)
