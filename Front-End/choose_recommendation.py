@@ -70,7 +70,9 @@ def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_
     if choice == -1:
         if type(values) != tuple and type(values) != list:
             values = (values, )
-        recommended = [get_item_with_column_value(colomn, value) for value in values]
+        recommended = []
+        [recommended.extend(get_item_with_column_value(colomn, value)) for value in values]
+        recommended = list(set(recommended))
     # Idea 3; previously purchased categories
     if choice == 0:
         recommended = other_purchase('category')

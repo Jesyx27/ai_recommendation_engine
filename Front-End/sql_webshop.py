@@ -136,10 +136,11 @@ def get_similar_of_product(p_id, columns):
 
 
 def get_item_with_column_value(colomn, value):
-    sql = f"SELECT _id FROM product WHERE {colomn} = '{value}'"
+    sql = f"SELECT _id FROM product WHERE {colomn} = (SELECT {colomn} FROM product WHERE _id = '{value}')"
     cur.execute(sql)
     fetch = cur.fetchall()
     categorized = [i[0] for i in fetch]
+    print('F', categorized)
     return categorized
 
 
