@@ -42,6 +42,7 @@ def collab(v_id):
         product_list = products[0][0]
     return product_list
 
+
 def content(p_id, columns):
     print(f"ALGORITHM || Tried content({p_id}, {columns})")
 
@@ -52,7 +53,13 @@ def content(p_id, columns):
     return products
 
 
-def choose_algorithm(choice, p_id="", v_id="", move_on_if_none=True):
+def get_item_with_column_value(column, value):
+    print(f"ALGORITHM || Tried get_item_with_column_value({column}, {value})")
+
+    products = sql_webshop.get_item_with_column_value(column, value)
+    return products
+
+def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_none=True):
     """
     :param choice Choice of what algorithm to use (temp)
     :param move_on_if_none OPTIONAL, whether to move on to the next algorithm
@@ -60,6 +67,10 @@ def choose_algorithm(choice, p_id="", v_id="", move_on_if_none=True):
     """
     recommended = []
 
+    if choice == -1:
+        if type(values) != tuple and type(values) != list:
+            values = (values, )
+        recommended = [get_item_with_column_value(colomn, value) for value in values]
     # Idea 3; previously purchased categories
     if choice == 0:
         recommended = other_purchase('category')
@@ -69,14 +80,14 @@ def choose_algorithm(choice, p_id="", v_id="", move_on_if_none=True):
     elif choice == 2:
         recommended = collab(v_id)
     # Regelateerde producten recommendenden
-    elif choice == 3:
+    elif choice == 4:
         recommended = content(p_id, ('category', 'properties_doelgroep'))
     # Idea 1; most popular products
-    elif choice == 4:
+    elif choice == 5:
         recommended = popular(10)
 
     if move_on_if_none and len(recommended) == 0:
-        return choose_algorithm(choice + 1)
+        return choose_algorithm(choice + 1, p_id, v_id, colomn, values, move_on_if_none)
     else:
         if len(recommended) > COUNT:
             if SHUFFLE:

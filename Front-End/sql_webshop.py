@@ -135,6 +135,14 @@ def get_similar_of_product(p_id, columns):
     return categorized
 
 
+def get_item_with_column_value(colomn, value):
+    sql = f"SELECT _id FROM product WHERE {colomn} = '{value}'"
+    cur.execute(sql)
+    fetch = cur.fetchall()
+    categorized = [i[0] for i in fetch]
+    return categorized
+
+
 #recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
     brands = []

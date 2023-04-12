@@ -35,17 +35,38 @@ class Recom(Resource):
         """ This function represents the handler for GET requests coming in
         through the API. It currently returns a random sample of products. """
 
-        algo = 3
+        algo = 0
         p_id = ''
+        column = ''
+        values = ()
 
         if ':' in recom_type:
-            q, p_id = recom_type.split(':')
+            page, attributes = recom_type.split(':')
+            if page == 'shoppingcart':
+                algo = -1
+                column = 'category'
+                values = attributes.split(';')
+            elif page == 'productdetail':
+                algo = 4
+                p_id = attributes
+            elif page == 'productpage':
+                algo = -1
+                column = 'category'
+                values = attributes.split(';')
+        print(values)
 
         # choose_recommendation global variables
         choose_recommendation.COUNT = count
         choose_recommendation.PROFILE_ID = profileid
         choose_recommendation.SHUFFLE = True
-        recommended = choose_recommendation.choose_algorithm(algo, p_id=p_id, v_id=profileid, move_on_if_none=True)
+        recommended = choose_recommendation.choose_algorithm(
+            algo,
+            p_id=p_id,
+            v_id=profileid,
+            move_on_if_none=True,
+            colomn=column,
+            values=values
+        )
 
         randcursor = database.products.aggregate([{'$sample': {'size': count}}])
         prodids = list(map(lambda x: x['_id'], list(randcursor)))
