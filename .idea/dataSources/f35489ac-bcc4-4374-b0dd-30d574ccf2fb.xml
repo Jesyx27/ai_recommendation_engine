@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.43">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>2167902</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2167907</IntrospectionStateNumber>
       <ServerVersion>14.5</ServerVersion>
-      <StartupTime>1679301175</StartupTime>
+      <StartupTime>1681292660</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -804,7 +804,7 @@ false Zulu
 13388||10|C|G
 13388||-9223372036854775808|U|G
 13388||10|U|G</Grants>
-      <IntrospectionStateNumber>2167902</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2167907</IntrospectionStateNumber>
       <ObjectId>16775</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4234,7 +4234,7 @@ false Zulu
     <schema id="264" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>2167902</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2167907</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>527</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4245,80 +4245,74 @@ false Zulu
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="266" parent="264" name="collaborative">
-      <ObjectId>28288</ObjectId>
-      <StateNumber>422076</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>postgres</OwnerName>
-    </table>
-    <table id="267" parent="264" name="collaborative_a">
+    <table id="266" parent="264" name="collaborative_a">
       <ObjectId>28860</ObjectId>
       <StateNumber>2167207</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="268" parent="264" name="event">
+    <table id="267" parent="264" name="event">
       <ObjectId>28715</ObjectId>
       <StateNumber>678066</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="269" parent="264" name="interested_product">
+    <table id="268" parent="264" name="interested_product">
       <ObjectId>28843</ObjectId>
       <StateNumber>2167193</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="270" parent="264" name="product">
+    <table id="269" parent="264" name="product">
       <ObjectId>28690</ObjectId>
       <StateNumber>644059</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="271" parent="264" name="rec_brand">
+    <table id="270" parent="264" name="rec_brand">
       <ObjectId>16899</ObjectId>
       <StateNumber>241944</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="272" parent="264" name="rec_brand_others">
+    <table id="271" parent="264" name="rec_brand_others">
       <ObjectId>16894</ObjectId>
       <StateNumber>241943</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="273" parent="264" name="session">
+    <table id="272" parent="264" name="session">
       <ObjectId>28755</ObjectId>
       <StateNumber>2160246</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="274" parent="264" name="visitor">
+    <table id="273" parent="264" name="visitor">
       <ObjectId>28763</ObjectId>
       <StateNumber>2160246</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="275" parent="265" name="buid">
+    <column id="274" parent="265" name="buid">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2160246</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="276" parent="265" name="v_id">
+    <column id="275" parent="265" name="v_id">
       <DataType>text|0s</DataType>
       <Position>2</Position>
       <StateNumber>2160246</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="277" parent="265" name="s_id">
+    <column id="276" parent="265" name="s_id">
       <DataType>text|0s</DataType>
       <Position>3</Position>
       <StateNumber>2160246</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <foreign-key id="278" parent="265" name="browserid_v_id_fkey">
+    <foreign-key id="277" parent="265" name="browserid_v_id_fkey">
       <ColNames>v_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28795</ObjectId>
@@ -4329,7 +4323,7 @@ false Zulu
       <RefTableName>visitor</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <foreign-key id="279" parent="265" name="browserid_s_id_fkey">
+    <foreign-key id="278" parent="265" name="browserid_s_id_fkey">
       <ColNames>s_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28800</ObjectId>
@@ -4340,7 +4334,7 @@ false Zulu
       <RefTableName>session</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="280" parent="265" name="browserid_pkey">
+    <index id="279" parent="265" name="browserid_pkey">
       <ColNames>buid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28793</ObjectId>
@@ -4352,81 +4346,69 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="281" parent="265" name="browserid_pkey">
+    <key id="280" parent="265" name="browserid_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28794</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2160246</StateNumber>
       <UnderlyingIndexId>28793</UnderlyingIndexId>
     </key>
-    <column id="282" parent="266" name="v_id">
-      <DataType>text|0s</DataType>
-      <Position>1</Position>
-      <StateNumber>422076</StateNumber>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="283" parent="266" name="recommendations">
-      <DataType>text[]|0s</DataType>
-      <Position>2</Position>
-      <StateNumber>422076</StateNumber>
-      <TypeId>1009</TypeId>
-    </column>
-    <column id="284" parent="267" name="v_id">
+    <column id="281" parent="266" name="v_id">
       <DataType>text|0s</DataType>
       <Position>1</Position>
       <StateNumber>2167207</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="285" parent="267" name="products">
+    <column id="282" parent="266" name="products">
       <DataType>text[]|0s</DataType>
       <Position>2</Position>
       <StateNumber>2167207</StateNumber>
       <TypeId>1009</TypeId>
     </column>
-    <column id="286" parent="268" name="_id">
+    <column id="283" parent="267" name="_id">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="287" parent="268" name="s_id">
+    <column id="284" parent="267" name="s_id">
       <DataType>text|0s</DataType>
       <Position>2</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="288" parent="268" name="t">
+    <column id="285" parent="267" name="t">
       <DataType>timestamp|0s</DataType>
       <Position>3</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="289" parent="268" name="action">
+    <column id="286" parent="267" name="action">
       <DataType>text|0s</DataType>
       <Position>4</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="290" parent="268" name="product">
+    <column id="287" parent="267" name="product">
       <DataType>text|0s</DataType>
       <Position>5</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="291" parent="268" name="time_on_page">
+    <column id="288" parent="267" name="time_on_page">
       <DataType>integer|0s</DataType>
       <Position>6</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="292" parent="268" name="max_time_inactive">
+    <column id="289" parent="267" name="max_time_inactive">
       <DataType>integer|0s</DataType>
       <Position>7</Position>
       <StateNumber>678066</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="293" parent="268" name="event_pkey">
+    <index id="290" parent="267" name="event_pkey">
       <ColNames>_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28720</ObjectId>
@@ -4438,93 +4420,93 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="294" parent="268" name="event_pkey">
+    <key id="291" parent="267" name="event_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28721</ObjectId>
       <Primary>1</Primary>
       <StateNumber>678066</StateNumber>
       <UnderlyingIndexId>28720</UnderlyingIndexId>
     </key>
-    <column id="295" parent="269" name="v_id">
+    <column id="292" parent="268" name="v_id">
       <DataType>text|0s</DataType>
       <Position>1</Position>
       <StateNumber>2167193</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="296" parent="269" name="product_array">
+    <column id="293" parent="268" name="product_array">
       <DataType>text[]|0s</DataType>
       <Position>2</Position>
       <StateNumber>2167193</StateNumber>
       <TypeId>1009</TypeId>
     </column>
-    <column id="297" parent="270" name="_id">
+    <column id="294" parent="269" name="_id">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="298" parent="270" name="category">
+    <column id="295" parent="269" name="category">
       <DataType>text|0s</DataType>
       <Position>2</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="299" parent="270" name="price_selling_price">
+    <column id="296" parent="269" name="price_selling_price">
       <DataType>integer|0s</DataType>
       <Position>3</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="300" parent="270" name="price_discount">
+    <column id="297" parent="269" name="price_discount">
       <DataType>integer|0s</DataType>
       <Position>4</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="301" parent="270" name="brand">
+    <column id="298" parent="269" name="brand">
       <DataType>text|0s</DataType>
       <Position>5</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="302" parent="270" name="properties_availability">
+    <column id="299" parent="269" name="properties_availability">
       <DataType>integer|0s</DataType>
       <Position>6</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="303" parent="270" name="properties_doelgroep">
+    <column id="300" parent="269" name="properties_doelgroep">
       <DataType>text|0s</DataType>
       <Position>7</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="304" parent="270" name="name">
+    <column id="301" parent="269" name="name">
       <DataType>text|0s</DataType>
       <Position>8</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="305" parent="270" name="recommendable">
+    <column id="302" parent="269" name="recommendable">
       <DataType>boolean|0s</DataType>
       <Position>9</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="306" parent="270" name="sub_category">
+    <column id="303" parent="269" name="sub_category">
       <DataType>text|0s</DataType>
       <Position>10</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="307" parent="270" name="sub_sub_category">
+    <column id="304" parent="269" name="sub_sub_category">
       <DataType>text|0s</DataType>
       <Position>11</Position>
       <StateNumber>644059</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="308" parent="270" name="product_pkey">
+    <index id="305" parent="269" name="product_pkey">
       <ColNames>_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28695</ObjectId>
@@ -4536,75 +4518,75 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="309" parent="270" name="product_pkey">
+    <key id="306" parent="269" name="product_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28696</ObjectId>
       <Primary>1</Primary>
       <StateNumber>644059</StateNumber>
       <UnderlyingIndexId>28695</UnderlyingIndexId>
     </key>
-    <column id="310" parent="271" name="product_id">
+    <column id="307" parent="270" name="product_id">
       <DataType>text|0s</DataType>
       <Position>1</Position>
       <StateNumber>241944</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="311" parent="271" name="recomended_brands">
+    <column id="308" parent="270" name="recomended_brands">
       <DataType>text|0s</DataType>
       <Position>2</Position>
       <StateNumber>241944</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="312" parent="272" name="brand">
+    <column id="309" parent="271" name="brand">
       <DataType>text|0s</DataType>
       <Position>1</Position>
       <StateNumber>241943</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="313" parent="272" name="recomended_brands">
+    <column id="310" parent="271" name="recomended_brands">
       <DataType>text|0s</DataType>
       <Position>2</Position>
       <StateNumber>241943</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="314" parent="273" name="_id">
+    <column id="311" parent="272" name="_id">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1960240</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="315" parent="273" name="has_sale">
+    <column id="312" parent="272" name="has_sale">
       <DataType>boolean|0s</DataType>
       <Position>2</Position>
       <StateNumber>1960240</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="316" parent="273" name="session_start">
+    <column id="313" parent="272" name="session_start">
       <DataType>timestamp|0s</DataType>
       <Position>3</Position>
       <StateNumber>1960240</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="317" parent="273" name="session_end">
+    <column id="314" parent="272" name="session_end">
       <DataType>timestamp|0s</DataType>
       <Position>4</Position>
       <StateNumber>1960240</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="318" parent="273" name="user_agent">
+    <column id="315" parent="272" name="user_agent">
       <DataType>json|0s</DataType>
       <Position>5</Position>
       <StateNumber>1960240</StateNumber>
       <TypeId>114</TypeId>
     </column>
-    <column id="319" parent="273" name="preferences">
+    <column id="316" parent="272" name="preferences">
       <DataType>json|0s</DataType>
       <Position>6</Position>
       <StateNumber>1960240</StateNumber>
       <TypeId>114</TypeId>
     </column>
-    <index id="320" parent="273" name="session_pkey">
+    <index id="317" parent="272" name="session_pkey">
       <ColNames>_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28760</ObjectId>
@@ -4616,45 +4598,45 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="321" parent="273" name="session_pkey">
+    <key id="318" parent="272" name="session_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28761</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1960240</StateNumber>
       <UnderlyingIndexId>28760</UnderlyingIndexId>
     </key>
-    <column id="322" parent="274" name="_id">
+    <column id="319" parent="273" name="_id">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2060242</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="323" parent="274" name="order_count">
+    <column id="320" parent="273" name="order_count">
       <DataType>integer|0s</DataType>
       <Position>2</Position>
       <StateNumber>2060242</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="324" parent="274" name="previously_recommended">
+    <column id="321" parent="273" name="previously_recommended">
       <DataType>text[]|0s</DataType>
       <Position>3</Position>
       <StateNumber>2060242</StateNumber>
       <TypeId>1009</TypeId>
     </column>
-    <column id="325" parent="274" name="recommendations_viewed_before">
+    <column id="322" parent="273" name="recommendations_viewed_before">
       <DataType>text[]|0s</DataType>
       <Position>4</Position>
       <StateNumber>2060242</StateNumber>
       <TypeId>1009</TypeId>
     </column>
-    <column id="326" parent="274" name="recommendations_similars">
+    <column id="323" parent="273" name="recommendations_similars">
       <DataType>text[]|0s</DataType>
       <Position>5</Position>
       <StateNumber>2060242</StateNumber>
       <TypeId>1009</TypeId>
     </column>
-    <index id="327" parent="274" name="visitor_pkey">
+    <index id="324" parent="273" name="visitor_pkey">
       <ColNames>_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28768</ObjectId>
@@ -4666,7 +4648,7 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="328" parent="274" name="visitor_pkey">
+    <key id="325" parent="273" name="visitor_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>28769</ObjectId>
       <Primary>1</Primary>

@@ -94,7 +94,7 @@ def get_similar_of_purchased_products(v_id="", type="brand"):
     return cur.fetchall()
 
 
-def get_collab_query(v_id):
+def get_collab(v_id):
     """
     Generic SQL functions, especially designed to filter collaboratively
     :return: tuple
@@ -116,6 +116,25 @@ def get_collab_query(v_id):
     return fetch
 
 
+def get_similar_of_product(p_id, columns):
+    table_name = "product"
+
+    columns_text = []
+
+    for column in columns:
+        columns_text.append(f"{column} = (SELECT {column} FROM {table_name} WHERE _id = '{p_id}')")
+
+    # SQL standard format
+    sql = f"""SELECT {table_name}._id from {table_name}
+            WHERE {' AND '.join(columns_text)}
+    """
+
+    cur.execute(sql)
+    fetch = cur.fetchall()
+    categorized = [i[0] for i in fetch]
+    return categorized
+
+
 #recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
     brands = []
@@ -134,6 +153,4 @@ if __name__ == '__main__':
 
         b = get_brand_products(tuple(collab_brands))
         b = [i[0] for i in b]
-    else:
-        print(':(')
 

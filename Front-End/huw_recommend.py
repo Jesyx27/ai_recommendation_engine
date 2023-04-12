@@ -31,21 +31,28 @@ class Recom(Resource):
     the webshop. At the moment, the API simply returns a random set of products
     to recommend."""
 
-    def get(self, profileid, count):
+    def get(self, profileid, count, recom_type):
         """ This function represents the handler for GET requests coming in
         through the API. It currently returns a random sample of products. """
+
+        algo = 3
+        p_id = ''
+
+        if ':' in recom_type:
+            q, p_id = recom_type.split(':')
 
         # choose_recommendation global variables
         choose_recommendation.COUNT = count
         choose_recommendation.PROFILE_ID = profileid
         choose_recommendation.SHUFFLE = True
-        recommended = choose_recommendation.choose_algorithm(2, profileid, True)
+        recommended = choose_recommendation.choose_algorithm(algo, p_id=p_id, v_id=profileid, move_on_if_none=True)
 
         randcursor = database.products.aggregate([{'$sample': {'size': count}}])
         prodids = list(map(lambda x: x['_id'], list(randcursor)))
+        print('RT:', recom_type)
         #return prodids, 200
         return recommended, 200
 
 # This method binds the Recom class to the REST API, to parse specifically
 # requests in the format described below.
-api.add_resource(Recom, "/<string:profileid>/<int:count>")
+api.add_resource(Recom, "/<string:profileid>/<int:count>/<string:recom_type>")

@@ -34,17 +34,25 @@ def other_purchase(column):
 def collab(v_id):
     print(f"ALGORITHM || Tried collab({v_id})")
 
-    products = sql_webshop.get_collab_query(v_id)
+    products = sql_webshop.get_collab(v_id)
     product_list = ()
 
     if len(products) > 0:
         # Unnestling
         product_list = products[0][0]
-        print(product_list)
     return product_list
 
+def content(p_id, columns):
+    print(f"ALGORITHM || Tried content({p_id}, {columns})")
 
-def choose_algorithm(choice, v_id="", move_on_if_none=True):
+    if type(columns) != tuple and type(columns) != list:
+        columns = (columns, )
+
+    products = sql_webshop.get_similar_of_product(p_id, columns)
+    return products
+
+
+def choose_algorithm(choice, p_id="", v_id="", move_on_if_none=True):
     """
     :param choice Choice of what algorithm to use (temp)
     :param move_on_if_none OPTIONAL, whether to move on to the next algorithm
@@ -60,8 +68,11 @@ def choose_algorithm(choice, v_id="", move_on_if_none=True):
         recommended = other_purchase('brand')
     elif choice == 2:
         recommended = collab(v_id)
-    # Idea 1; most popular products
+    # Regelateerde producten recommendenden
     elif choice == 3:
+        recommended = content(p_id, ('category', 'properties_doelgroep'))
+    # Idea 1; most popular products
+    elif choice == 4:
         recommended = popular(10)
 
     if move_on_if_none and len(recommended) == 0:
