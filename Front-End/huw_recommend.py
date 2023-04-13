@@ -44,16 +44,11 @@ class Recom(Resource):
             page, attributes = recom_type.split(':')
             if page == 'shoppingcart':
                 algo = -1
-                column = 'category'
+                column = 'brand'
                 values = attributes.split(';')
             elif page == 'productdetail':
-                algo = 4
+                algo = 3
                 p_id = attributes
-            #elif page == 'productpage':
-            #     algo = -1
-            #    column = 'category'
-            #    values = attributes.split(';')
-        print('VVV', values)
         #algo = 5
 
         # choose_recommendation global variables

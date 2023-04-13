@@ -61,8 +61,8 @@ def get_item_with_column_value(column, value):
 
 def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_none=True):
     """
-    :param choice Choice of what algorithm to use (temp)
-    :param move_on_if_none OPTIONAL, whether to move on to the next algorithm
+    :param choice: Choice of what algorithm to use (temp)
+    :param move_on_if_none: OPTIONAL, whether to move on to the next algorithm
      if the chosen one doesn't return any items
     """
     recommended = []
@@ -75,17 +75,15 @@ def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_
         recommended = list(set(recommended))
     # Idea 3; previously purchased categories
     if choice == 0:
-        recommended = other_purchase('category')
-    # Idea 4; previously purchased brands
+        recommended = content(p_id, ('category', 'properties_doelgroep'))
     elif choice == 1:
-        recommended = other_purchase('brand')
+        recommended = other_purchase('category')
+        recommended.extend(other_purchase('brand'))
+    # Collaborative idea
     elif choice == 2:
         recommended = collab(v_id)
-    # Regelateerde producten recommendenden
-    elif choice == 4:
-        recommended = content(p_id, ('category', 'properties_doelgroep'))
     # Idea 1; most popular products
-    elif choice == 5:
+    elif choice == 3:
         recommended = popular(10)
 
     if move_on_if_none and len(recommended) == 0:

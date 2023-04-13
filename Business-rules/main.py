@@ -3,6 +3,7 @@ from getpass import getpass
 import psycopg2
 from sql_functions import create_table, add_data, get_product_ids, random_product, create_interested_products
 from filters import brand_recommend, others_bought
+import collaborative_filtering
 from random import choice
 
 
@@ -65,7 +66,7 @@ def main():
     """
     # Tijdelijke plaatsing van deze functie
     create_interested_products(CURSOR, CONN)
-
+    collaborative_filtering.regular_call()
 
     while True:
         print("1. Tables maken\n2. Data toevoegen\n3. Voorbeeld geven\n4. Sluiten")
@@ -98,7 +99,3 @@ if __name__ == "__main__":
     #verbinding verbreken
     CURSOR.close()
     CONN.close()
-
-
-
-

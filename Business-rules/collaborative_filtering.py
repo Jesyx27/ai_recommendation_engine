@@ -253,21 +253,6 @@ def regular_call():
     :return:
         The output from the collaborative filtering
     """
-
-    preferences_variables = get_sql(variables=pref_variables, inner_joins=pref_inner_joins, table=table,
-                                    conditions=cond)
-
-    mp = merge_preferences(preferences=preferences_variables,
-                           variables=pref_variables,
-                           visitor_text='v_id',
-                           preference_text="preferences")
-
-    favorite = calculate_favorites(variables=calc_variables, preferences=mp, weights=weights)
-    sim = get_similar_users(variables=sim_variables, favorites=favorite)
-    return get_recommendables(sim)
-
-
-if __name__ == '__main__':
     table_name = 'collaborative_a'
     a = regular_call()
     sql_functions.create_table(cur, conn, table_name, ('v_id', 'products'), ('text', 'text[]'))
@@ -275,4 +260,7 @@ if __name__ == '__main__':
     for i in a:
         if len(a[i]) > 0:
             add_data(table_name, (i, list(a[i])))
-            #print(i, a[i])
+
+
+if __name__ == '__main__':
+    regular_call()

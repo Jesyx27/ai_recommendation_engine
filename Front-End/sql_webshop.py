@@ -140,11 +140,9 @@ def get_item_with_column_value(colomn, value):
     cur.execute(sql)
     fetch = cur.fetchall()
     categorized = [i[0] for i in fetch]
-    print('F', categorized)
     return categorized
 
 
-#recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
 if __name__ == '__main__':
     brands = []
     recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')
@@ -162,4 +160,3 @@ if __name__ == '__main__':
 
         b = get_brand_products(tuple(collab_brands))
         b = [i[0] for i in b]
-
