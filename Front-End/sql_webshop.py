@@ -60,6 +60,7 @@ def get_popular_products(table_name="interested_product"):
     :param table_name string the table where it pulls the
     :return tuple, i.e.: ((product_id, amount purchased), ...)
     """
+
     sql = f"""SELECT DISTINCT unnest(product_array), count(*) as c FROM {table_name}
     GROUP BY unnest(product_array)
     ORDER BY c DESC"""

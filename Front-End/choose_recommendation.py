@@ -82,18 +82,19 @@ def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_
         # Removing doubles
         recommended = list(set(recommended))
     if choice == 0:
-        recommended = content(p_id, ('category', 'properties_doelgroep'))
+        recommended = content(p_id, ('brand', 'category', 'properties_doelgroep'))
     elif choice == 1:
         recommended = other_purchase('category')
         recommended.extend(other_purchase('brand'))
         # Removing doubles
         recommended = list(set(recommended))
-    # Collaborative idea
     elif choice == 2:
         recommended = collab(v_id)
     # Idea 1; most popular products
     elif choice == 3:
         recommended = popular(10)
+    elif choice == 4:
+        recommended = discount()
 
     if move_on_if_none and len(recommended) == 0:
         return choose_algorithm(choice + 1, p_id, v_id, colomn, values, move_on_if_none)

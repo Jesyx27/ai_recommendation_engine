@@ -228,13 +228,16 @@ class HUWebshop(object):
         service. At the moment, it only transmits the profile ID and the number
         of expected recommendations; to have more user information in the REST
         request, this function would have to change."""
-        resp = requests.get(self.recseraddress+"/"+session['profile_id']+"/"+str(count)+"/"+recom_type)
+        resp = requests.get(self.recseraddress+"/"+session['profile_id']+"/"+str(count)+"/"+recom_type.replace('/', '_'))
+        print(recom_type)
         if resp.status_code == 200:
             recs = eval(resp.content.decode())
             queryfilter = {"_id": {"$in": recs}}
             querycursor = self.database.products.find(queryfilter, self.productfields)
             resultlist = list(map(self.prepproduct, list(querycursor)))
             return resultlist
+        else:
+            print('Non-200 response')
         return []
 
     """ ..:: Full Page Endpoints ::.. """
@@ -260,13 +263,14 @@ class HUWebshop(object):
             pagepath = "/producten/"+("/".join(nononescats))+"/"
         else:
             pagepath = "/producten/"
+        print('pp', pagepath + "_".join(nononescats))
         return self.renderpackettemplate('products.html', {'products': prodlist, \
             'productcount': prodcount, \
             'pstart': skipindex + 1, \
             'pend': skipindex + session['items_per_page'] if session['items_per_page'] > 0 else prodcount, \
             'prevpage': pagepath+str(page-1) if (page > 1) else False, \
             'nextpage': pagepath+str(page+1) if (session['items_per_page']*page < prodcount) else False, \
-            'r_products':self.recommendations(4, f'productpage:{pagepath}'), \
+            'r_products':self.recommendations(4, f'productpage:{pagepath + "_".join(nononescats)}'), \
             'r_type':list(self.recommendationtypes.keys())[0],\
             'r_string':list(self.recommendationtypes.values())[0]\
             })

@@ -38,7 +38,7 @@ class Recom(Resource):
         algo = 0
         p_id = ''
         column = ''
-        values = ()
+        values = ''
 
         if ':' in recom_type:
             page, attributes = recom_type.split(':')
@@ -47,9 +47,10 @@ class Recom(Resource):
                 column = 'brand'
                 values = attributes.split(';')
             elif page == 'productdetail':
-                algo = 3
+                algo = 0
                 p_id = attributes
-        #algo = 5
+            elif page == 'productpage':
+                algo = 2
 
         # choose_recommendation global variables
         choose_recommendation.COUNT = count
@@ -63,7 +64,6 @@ class Recom(Resource):
             colomn=column,
             values=values
         )
-
 
         randcursor = database.products.aggregate([{'$sample': {'size': count}}])
         prodids = list(map(lambda x: x['_id'], list(randcursor)))
