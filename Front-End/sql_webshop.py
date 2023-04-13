@@ -143,6 +143,17 @@ def get_item_with_column_value(colomn, value):
     return categorized
 
 
+def discount_recommend():
+    """
+    Functie voor het recommenderen van producten met een aanbieding
+    """
+
+    query = "SELECT _id\nFROM product\nWHERE price_discount IS NOT NULL\nORDER BY price_discount DESC"
+
+    cur.execute(query)
+    return cur.fetchall()
+
+
 if __name__ == '__main__':
     brands = []
     recommendation = recommendation_collaborative('59dce84ca56ac6edb4cd01fa')

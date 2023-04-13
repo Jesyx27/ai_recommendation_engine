@@ -59,6 +59,13 @@ def get_item_with_column_value(column, value):
     products = sql_webshop.get_item_with_column_value(column, value)
     return products
 
+
+def discount():
+    products = sql_webshop.discount_recommend()
+    print(products)
+    return products
+
+
 def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_none=True):
     """
     :param choice: Choice of what algorithm to use (temp)
@@ -72,13 +79,15 @@ def choose_algorithm(choice, p_id="", v_id="", colomn="", values=(), move_on_if_
             values = (values, )
         recommended = []
         [recommended.extend(get_item_with_column_value(colomn, value)) for value in values]
+        # Removing doubles
         recommended = list(set(recommended))
-    # Idea 3; previously purchased categories
     if choice == 0:
         recommended = content(p_id, ('category', 'properties_doelgroep'))
     elif choice == 1:
         recommended = other_purchase('category')
         recommended.extend(other_purchase('brand'))
+        # Removing doubles
+        recommended = list(set(recommended))
     # Collaborative idea
     elif choice == 2:
         recommended = collab(v_id)
